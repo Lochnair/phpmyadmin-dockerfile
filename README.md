@@ -14,7 +14,7 @@ phpMyAdmin requires a configuration file. If you already have one, you can skip 
 
 To start phpMyAdmin installer
 
-	docker run --link mysql:db -p 80:80 -p 443:443 -d simplyintricate/phpmyadmin
+	docker run --link mysql:db -p 80:80 -p 443:443 -d lochnair/phpmyadmin
 
 Then on a web browser, go to the docker host's server setup folder. For example, if you are running phpMyAdmin on your local computer, go to [http://localhost/setup](http://localhost/setup).
 
@@ -24,19 +24,19 @@ The installer will ask a series of questions and generate a config file for you.
 
 Once you have `config.inc.php`, you can start phpMyAdmin and run it normally by mounting the config to the container. You will also have to provide an image folder so that you can upload to your Wiki as well.
 
-	sudo docker run -v <path to config.inc.php>:/usr/share/nginx/html/config.inc.php:ro --link mysql:db -p 80:80 -p 443:443 -d simplyintricate/phpmyadmin
+	sudo docker run -v <path to config.inc.php>:/usr/share/nginx/html/config.inc.php:ro --link mysql:db -p 80:80 -p 443:443 -d lochnair/phpmyadmin
 
 Note that if you are linking a live mysql container, the hostname is the second operand. In this example, the hostname is `db`.
 
 To help maintain immutability of the container, you may extend this image to include your config.inc.php into your own version of phpMyAdmin. Here is a sample Dockerfile for that
 
-	FROM simplyintricate/phpMyAdmin
+	FROM lochnair/phpMyAdmin
 
 	RUN mkdir /usr/share/nginx/html/config
 	ADD config.inc.php /usr/share/nginx/html/config.inc.php
 
 ## Contributing
 
-You can help make this Dockerfile better by contributing at [Github](https://github.com/stephenliang/phpmyadmin-dockerfile)
+You can help make this Dockerfile better by contributing at [Github](https://github.com/Lochnair/phpmyadmin-dockerfile)
 
 If you found this Docker image helpful, send a tip via Bitcoin to 14b9y1Qw17coEkJFaAAvuXpKZLadTeBPw7
